@@ -1,0 +1,53 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  9
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      transportProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+Ds_anode        Ds_anode [0  2 -1 0 0 0 0] 4e-14;  //[kg m s K mol A cd]
+Ds_cathode      Ds_cathode [0  2 -1 0 0 0 0] 4e-14;  //[kg m s K mol A cd]
+normalizer_fi   normalizer_fi [-1 -5 4 0 0 2 0]    1;
+F               F [0  0  1 0 -1 1 0] 96485;
+Uunit           Uunit [1  2  -3 0 0 -1 0] 1;
+R               R [1  2  -2 -1 -1 0 0] 8.314;
+T               T [0  0  0  1  0 0 0] 298;
+beta_a          beta_a [1  2  -3 0 0 -1 0] 0.051;
+beta_c          beta_c [1  2  -3 0 0 -1 0] -0.051;
+rateK_anode     rateK_anode [0 1 -1 0 0 0 0]  2e-8;
+rateK_cathode   rateK_cathode [0 1 -1 0 0 0 0]  2e-8;
+i0_anode        i0_anode [0 -2 0 0 0 1 0]   36 ;
+i0_cathode      i0_cathode [0 -2 0 0 0 1 0]   26 ;
+ai_anode        ai_anode [0 -1 0 0 0 0 0]   195000; //243750;//179000 ; // 723600 ; 
+ai_cathode      ai_cathode [0 -1 0 0 0 0 0] 210000; // 262500;// 235000 ; // 885000 ;// 
+Rs_anode        Rs_anode [0  1 0 0 0 0 0]   0.00001;
+Rs_cathode      Rs_cathode [0  1 0 0 0 0 0]   0.00001;
+Cs_anode_max    Cs_anode_max [0 -3 0 0 1 0 0]   30555 ; // corresponds to x = 0.98   
+Cs_anode_min    Cs_anode_min [0 -3 0 0 1 0 0]   0 ; // 
+Cs_cathode_max  Cs_cathode_max [0 -3 0 0 1 0 0]   51554 ;
+Cs_cathode_min  Cs_cathode_min [0 -3 0 0 1 0 0]   0 ;
+Cs_anode0       Cs_anode0 [0 -3 0 0 1 0 0]   26128 ;
+Cs_cathode0     Cs_cathode0 [0 -3 0 0 1 0 0]   25751 ;
+
+oneC_i          oneC_i [0 -2 0 0 0 1 0] 20 ;
+exclude1         (8.01e-5 5e-7 5e-7);
+exclude2         (10.39e-5 5e-7 5e-7);
+transfNo         0.364;
+brug             1.5;
+ns_anodeR        20;
+ns_cathodeR      20;
+ns_anode1D       40;
+ns_sep1D         12;
+ns_cathode1D     32;
+relaxAnode       1.0;
+relaxCathode     1.0;
+// ************************************************************************* //

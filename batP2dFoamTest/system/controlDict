@@ -1,0 +1,97 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  dev
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     batP2dFoam;
+
+startFrom       startTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         1737;
+
+deltaT          10;
+
+writeControl    adjustableRunTime; //timeStep;  // 
+
+writeInterval   300;
+
+purgeWrite      0;
+
+writeFormat     ascii; //binary
+
+writePrecision  7;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   8;
+
+runTimeModifiable on;
+
+adjustTimeStep  on;
+
+maxDeltaT       5;
+
+maxDi           100;
+
+functions
+{
+    #includeFunc graphUniform
+    (
+        funcName=fif,
+        start=(4e-6 5e-7 5e-7),
+        end=(168e-6 5e-7 5e-7),
+        nPoints=84,
+        axis=x,
+        fif
+    )
+
+    #includeFunc graphUniform
+    (
+        funcName=fis,
+        start=(4e-6 5e-7 5e-7),
+        end=(168e-6 5e-7 5e-7),
+        nPoints=84,
+        axis=x,
+        fis
+    )
+    
+    #includeFunc graphUniform
+    (
+        funcName=ce,
+        start=(4e-6 5e-7 5e-7),
+        end=(168e-6 5e-7 5e-7),
+        nPoints=84,
+        axis=x,
+        Ce
+    )    
+
+    #includeFunc graphUniform
+    (
+        funcName=css,
+        start=(4e-6 5e-7 5e-7),
+        end=(168e-6 5e-7 5e-7),
+        nPoints=84,
+        axis=x,
+        Css
+    )     
+}
+
+// ************************************************************************* //

@@ -1,0 +1,102 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2112                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      topoSetDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+// scale 1e-6;
+anodeL 80e-6;
+separatorL 24e-6;
+ansepL 104e-6;
+cathodeL 64e-6;
+// fullL #calc "$anodeL+$separatorL+$cathodeL";
+fullL 168e-6;
+deltaL 1e-6;
+
+
+
+actions
+(
+    // anode
+    {
+        name    anodeCellSet;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        { 
+        box     (0 0 0) ($anodeL $deltaL $deltaL);
+        }
+    }
+    
+    {
+        name    anode;
+        type    cellZoneSet;
+        action  new;
+        source  setToCellZone;
+        sourceInfo
+        { 
+        set     anodeCellSet;
+        }
+    }
+
+    // separator
+    {
+        name    separatorCellSet;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        { 
+        box     ($anodeL 0 0) ($ansepL $deltaL $deltaL);
+        }
+    }
+    {
+        name    separator;
+        type    cellZoneSet;
+        action  new;
+        source  setToCellZone;
+        sourceInfo
+        { 
+        set     separatorCellSet;
+        }
+    }
+
+    // cathode
+    {
+        name    cathodeCellSet;
+        type    cellSet;
+        action  new;
+        source  boxToCell;
+        sourceInfo
+        { 
+        box     ($ansepL 0 0) ($fullL $deltaL $deltaL);
+        }
+    }
+    {
+        name    cathode;
+        type    cellZoneSet;
+        action  new;
+        source  setToCellZone;
+        sourceInfo
+        { 
+        set     cathodeCellSet;
+        }
+    }
+    
+
+
+);
+
+
+// ************************************************************************* //

@@ -1,0 +1,70 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  9
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      setFieldsDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+/***\
+defaultFieldValues
+(
+    volVectorFieldValue U (0 0 0)
+    volScalarFieldValue T 348.432
+    volScalarFieldValue p 100000
+);
+\***/
+regions
+(
+    zoneToCell
+    {
+        name  anode;
+        fieldValues
+        (
+            volScalarFieldValue kf 8
+            volScalarFieldValue ks 100
+            volScalarFieldValue is_anode 1
+            volScalarFieldValue is_cathode 0  
+            volScalarFieldValue poro 0.35                              
+        );
+    }
+    
+    zoneToCell
+    {
+        name  separator;
+        fieldValues
+        (
+            volScalarFieldValue kf 8
+            volScalarFieldValue ks 100
+            volScalarFieldValue is_anode 0
+            volScalarFieldValue is_cathode 0     
+            volScalarFieldValue poro 0.42                                                          
+        );
+    }    
+    
+    zoneToCell
+    {
+        name  cathode;
+        fieldValues
+        (
+            volScalarFieldValue kf 8
+            volScalarFieldValue ks 100
+            volScalarFieldValue is_anode 0
+            volScalarFieldValue is_cathode 1 
+            volScalarFieldValue poro 0.3    
+            volScalarFieldValue Css 25751
+            volScalarFieldValue Csav 25751                                                                                        
+        );
+    }    
+    
+);
+
+
+// ************************************************************************* //

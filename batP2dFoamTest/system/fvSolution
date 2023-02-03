@@ -1,0 +1,155 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.1.x                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      fvSolution;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solvers
+{
+    fis
+    {
+        solver        PBiCG;//PCG;//GAMG;// PBiCGStab;//PBiCGStab;// smoothSolver;//
+        preconditioner   DILU; //DIC; // DIC; // 
+        tolerance        1e-10;
+        relTol           0;//0.01;
+	minIter         3;
+    }
+    
+    fif
+    {
+	//solver          smoothSolver;//PBiCGStab;//GAMG;//
+	//smoother 	 symGaussSeidel;//
+        solver           PCG;//PBiCGStab;//
+        preconditioner   DIC; //  DILU; // 
+        tolerance        1e-10;
+        relTol           0;//0.01;
+	minIter         3;
+    }
+
+    
+   Ce
+    {
+        solver          PCG;// PBiCGStab;// PBiCG;//GAMG; // 
+        preconditioner  DIC; //DILU;
+        tolerance       1e-6;
+        relTol          0;
+	minIter         3;
+    }
+    
+   Csav
+    {
+       	solver          smoothSolver;//PCG;//PBiCGStab;//GAMG;//
+	smoother 	symGaussSeidel;//
+        tolerance       1e-9;
+        relTol          0;
+	minIter         1;
+    } 
+    
+    
+    fisFinal
+    {
+        solver        PBiCG;//PBiCGStab;//  smoothSolver;//PCG;//GAMG;//
+	 //smoother 	 symGaussSeidel;//
+        preconditioner   DILU; //DIC;
+        tolerance        5e-12;
+        relTol           0;//0.01;
+//	minIter         3;        
+    }
+    
+    
+    fifFinal
+    {
+	//solver          smoothSolver;//PCG;//PBiCGStab;//GAMG;//
+	//smoother 	 symGaussSeidel;//
+        solver           PCG; // PBiCGStab;
+        preconditioner   DIC;// none; //
+        tolerance        5e-12;
+        relTol           0;//0.01;
+//	minIter         3;        
+    }
+
+    
+    CeFinal
+    {
+        solver          PCG;//PBiCGStab;//GAMG; // 
+        preconditioner  DIC; //DILU;
+        tolerance       1e-7;
+        relTol          0;
+	minIter         3;
+    }
+    
+    CsavFinal
+    {
+       	solver          smoothSolver;//PCG;//PBiCGStab;//GAMG;//
+	smoother 	symGaussSeidel;//
+        tolerance       1e-7;
+        relTol          0;
+	minIter         1;
+    } 
+    
+}
+
+
+PIMPLE
+{
+    nCorrectors     0;
+    nNonOrthogonalCorrectors 0;
+    nOuterCorrectors 200;
+ //   fifRefPoint       (0.000 0.0000005 0.0000005);
+ //   fifRefValue       0;
+ 
+    outerCorrectorResidualControl
+    {
+    
+    fis
+    {
+        tolerance        5e-12;
+        relTol           0;//0.01;
+    }
+    
+    fif
+    {
+        tolerance        5e-12;
+        relTol           0;//0.01;
+    }
+    
+    Ce
+    {
+        tolerance        1e-7;
+        relTol           0;//0.01;
+    }    
+    
+    }
+
+}
+
+relaxationFactors 
+{ 
+    equations 
+    { 	
+      //  relax_init		0.3;//0.001;//0.01;// initial relaxaction for convergence
+      //  relax_end		0.95; //0.7;//0.9; //0.9 is more stable but 0.95 more convergent
+      //  switch_iter		10; // number of iteration in which the relaxation switch 
+	//Csav                    0.1 ;
+//        fis			0.1;	
+    } 
+    fields
+    {
+//	fi_s               0.8;
+//	fi_f               0.8;
+	//Ce                 0.8;
+    }
+   
+} 
+
+// ************************************************************************* //

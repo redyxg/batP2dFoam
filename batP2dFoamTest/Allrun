@@ -1,0 +1,23 @@
+#!/bin/sh
+
+# Source tutorial run functions
+. $WM_PROJECT_DIR/bin/tools/RunFunctions
+
+# Get application name
+application=$(getApplication)
+
+runApplication blockMesh
+
+# Create faceZones for baffles and fan
+runApplication topoSet
+
+cp -R 0.orig 0
+
+runApplication setFields
+# Create wall and cyclic baffles and the fields on them
+# runApplication createBaffles -overwrite
+
+# runApplication changeDictionary
+
+runApplication $application 
+# runApplication -s graphUniform postProcess -func graphUniform

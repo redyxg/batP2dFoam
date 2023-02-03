@@ -1,0 +1,5 @@
+
+batP2dFoam.C
+
+EXE = $(FOAM_USER_APPBIN)/batP2dFoam
+
